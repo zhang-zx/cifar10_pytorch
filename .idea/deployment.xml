@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="zhangzhixing@166.111.68.231:50022" showNewOnSourceInSync="false">
+    <serverData>
+      <paths name="zhangzhixing@166.111.68.231:50022">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/netlab/zhangzhixing/cifar10_pytorch" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
