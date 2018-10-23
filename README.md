@@ -14,13 +14,19 @@ Models | Best Accuracy | Comments
 ## AlexNet
 
 1. Training Procedure 
+
 ![image](./Img/AlexNet_Train.png)
+
 2. Learning Rate Decay 
+
 ![image](./Img/AlexNet_Learning_Rate.png)
 
 ## ResNet 18
 
 1. Training Procedure 
+
 ![image](./Img/ResNet18_Train.png)
+
 2. Learning Rate Decay 
+
 ![image](./Img/ResNet18_Learning_Rate.png)
