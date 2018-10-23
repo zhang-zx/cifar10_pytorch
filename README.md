@@ -13,10 +13,10 @@ Models | Best Accuracy | Comments
 
 ## AlexNet
 
-1. Training Procedure ![Training Procedure](./Train Image/AlexNetTrain.png)
-2. Learning Rate Decay![AlexNet Learning Rate](./Train Image/AlexNet Learning Rate.png)
+1. Training Procedure ![Training Procedure](https://github.com/zhang-zx/cifar10_pytorch/master//Train Image/AlexNetTrain.png)
+2. Learning Rate Decay![AlexNet Learning Rate](https://github.com/zhang-zx/cifar10_pytorch/master//Train Image/AlexNet Learning Rate.png)
 
 ## ResNet 18
 
-1. Training Procedure![ResNet18 train](./Train Image/ResNet18 train.png)
-2. Learning Rate Decay![ResNet18 Learning Rate](./Train Image/ResNet18 Learning Rate.png)
+1. Training Procedure![ResNet18 train](https://github.com/zhang-zx/cifar10_pytorch/master//Train Image/ResNet18 train.png)
+2. Learning Rate Decay![ResNet18 Learning Rate](https://github.com/zhang-zx/cifar10_pytorch/master//Train Image/ResNet18 Learning Rate.png)
