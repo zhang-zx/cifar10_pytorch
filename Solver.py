@@ -12,6 +12,7 @@ from util import progress_bar
 
 class Solver(object):
     def __init__(self, config):
+        # torch.cuda.set_device(1)
         self.model = None
         self.model_name = config.net
         self.lr = config.lr
@@ -126,20 +127,20 @@ class Solver(object):
         return test_loss, test_correct / total
 
     def save(self):
-        model_out_path = "./%s model.pth" %(self.model_name)
+        model_out_path = "./pth/%s model.pth" %(self.model_name)
         torch.save(self.model, model_out_path)
         print("Checkpoint saved to {}".format(model_out_path))
 
 
     def process(self):
-        path = './%s train.png'%(self.model_name)
+        path = './Img/%s_train.png'%(self.model_name)
         x = range(self.epochs)
         y1 = self.hist['Train Accu']
         y2 = self.hist['Test Accu']
-        plt.plot(x, y1, label='Train Accu')
-        plt.plot(x, y2, label='Test Accu')
+        plt.plot(x, y1, label='Train Accu.')
+        plt.plot(x, y2, label='Test Accu.')
         plt.xlabel('Epoch')
-        plt.ylabel('Accu')
+        plt.ylabel('Accu.')
         plt.legend(loc=4)
         plt.grid(True)
         plt.tight_layout()
@@ -149,11 +150,11 @@ class Solver(object):
     def draw_learning_rate(self):
         x = range(self.epochs)
         y3 = self.hist['lr']
-        plt.plot(x, y3, label='learning rate')
+        plt.plot(x, y3, label='Learning Rate')
         plt.xlabel('Epoch')
         plt.ylabel('Learning Rate')
         plt.legend(loc=4)
         plt.grid(True)
         plt.tight_layout()
-        plt.savefig('./%s Learning Rate.png' % (self.model_name))
+        plt.savefig('./Img/%s_Learning_Rate.png' % (self.model_name))
         plt.close()
