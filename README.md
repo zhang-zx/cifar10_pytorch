@@ -1,17 +1,40 @@
 # Cifar-10_PyTorch
 
 Personal paper reading and code implementation.
-Inspired by [pytorch-cifar10](https://github.com/icpm/pytorch-cifar10) and the [Solver.py](https://github.com/zhang-zx/cifar10_pytorch/master/Solver.py) is based on `main.py`in [pytorch-cifar10](https://github.com/icpm/pytorch-cifar10) (I take the processing bar code directly into use of course🌝)
+
+Inspired by [pytorch-cifar10](https://github.com/icpm/pytorch-cifar10) and the [Solver.py](https://github.com/zhang-zx/cifar10_pytorch/master/Solver.py) is based on `main.py`in [pytorch-cifar10](https://github.com/icpm/pytorch-cifar10) (I take the progress bar code directly into use of course🌝)
 
 ## Result
 Models | Best Accuracy | Comments
 :---:|:---:|:---:
 [AlexNet](https://github.com/zhang-zx/cifar10_pytorch/master/models/AlexNet.py) | 82.18% | BatchNorm and learning rate adjustment is added to make an improvment. 
+[VGG11](https://github.com/zhang-zx/cifar10_pytorch/master/models/VGGt.py) |87.62% |Just as good as I expected.
+[VGG13](https://github.com/zhang-zx/cifar10_pytorch/master/models/VGG.py) |--- |---
+[VGG16](https://github.com/zhang-zx/cifar10_pytorch/master/models/VGG.py) |--- |---
+[VGG19](https://github.com/zhang-zx/cifar10_pytorch/master/models/VGG.py) |--- |---
 [ResNet18](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | 89.57% |From the picture, one can tell that this model is convergent before 50 epochs and the rest training is just in vain. :) It seems that this ResNet is not as good as expected. Maybe I made something wrong.
 [ResNet34](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | 90.81% |Same as ResNet18, such a failure. It's nothing but a waste of time😞. :) I think at most 100 epochs is enough for these ResNet models. The accuracy on training set approched 100% at that time.
-[ResNet50](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) |--- |---
+[ResNet50](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) |90.40% |Maybe 50 epochs is enough😞. Not sure why it has worse performance than ResNet 34. Maybe it is due the inappropriate modification on bottleneck blocks...
 [ResNet101](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | ---|---
 [ResNet152](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | --- |---
+
+
+
+## Default Settings
+
+```python 
+self.lr = 0.001
+self.train_batch_size = 100
+self.test_batch_size = 100
+self.optimizer = optim.Adam(self.model.parameters(), lr=self.lr)
+self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer=self.optimizer, 
+                                                      mode='min', factor=0.5, patience=5, 
+                                                      verbose=False, threshold=0.0001, 
+                                                      threshold_mode='rel',
+                                                      cooldown=0, min_lr=1e-5, eps=1e-08)
+self.criterion = nn.CrossEntropyLoss().to(self.device)
+```
+
 
 
 
@@ -49,6 +72,16 @@ The log will be in nohup.out, and this line is really useful.
 
 ![image](./Img/AlexNet_Learning_Rate.png)
 
+## VGG_11
+
+1. **Training Procedure** 
+
+![image](./Img/VGG_11_Train.png)
+
+2. **Learning Rate Decay** 
+
+![image](./Img/VGG_11_Learning_Rate.png)
+
 ## ResNet 18
 
 1. **Training Procedure** 
@@ -68,3 +101,13 @@ The log will be in nohup.out, and this line is really useful.
 2. **Learning Rate Decay** 
 
 ![image](./Img/ResNet34_Learning_Rate.png)
+
+## ResNet 50
+
+1. **Training Procedure** 
+
+![image](./Img/ResNet50_Train.png)
+
+2. **Learning Rate Decay** 
+
+![image](./Img/ResNet50_Learning_Rate.png)

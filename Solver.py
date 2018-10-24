@@ -138,7 +138,7 @@ class Solver(object):
 
 
     def process(self):
-        path = './Img/%s_train.png'%(self.model_name)
+        path = './Img/%s_Train.png'%(self.model_name)
         x = range(self.epochs)
         y1 = self.hist['Train Accu']
         y2 = self.hist['Test Accu']
