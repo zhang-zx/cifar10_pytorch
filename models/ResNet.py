@@ -1,6 +1,15 @@
+import torch
 import torch.nn as nn
 import math
 NUM_CLASSES = 10
+
+config = {
+    'ResNet18': [2, 2, 2, 2],
+    'ResNet34': [3, 4, 6, 3],
+    'ResNet50': [3, 4, 6, 3],
+    'ResNet101': [3, 4, 23, 3],
+    'ResNet152': [3, 8, 36, 3],
+}
 
 class BasicBlock(nn.Module):
     expansion = 1
@@ -72,7 +81,6 @@ class ResNet(nn.Module):
             if isinstance(m, nn.Conv2d):
                 n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
                 m.weight.data.normal_(0, math.sqrt(2. / n))
-                # m.bias.data.zero_()
             elif isinstance(m, nn.BatchNorm2d):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
@@ -81,9 +89,7 @@ class ResNet(nn.Module):
     def __make_layers(self, block, channels, num_blocks, stride=1):
         downsample = None
         if stride != 1 or self.in_channels != channels * block.expansion:
-
             downsample = nn.Sequential(
-                # nn.AvgPool2d(kernel_size=stride, stride=stride),
                 nn.Conv2d(in_channels=self.in_channels, out_channels=channels * block.expansion, kernel_size=1, stride=stride, bias=False),
                 nn.BatchNorm2d(num_features=channels * block.expansion)
             )
@@ -106,20 +112,28 @@ class ResNet(nn.Module):
 
 
 def ResNet18():
-    return ResNet(BasicBlock, [2, 2, 2, 2])
+    return ResNet(BasicBlock, config['ResNet18'])
 
 
 def ResNet34():
-    return ResNet(BasicBlock, [3, 4, 6, 3])
+    return ResNet(BasicBlock, config['ResNet34'])
 
 
 def ResNet50():
-    return ResNet(Bottleneck, [3, 4, 6, 3])
+    return ResNet(Bottleneck, config['ResNet50'])
 
 
 def ResNet101():
-    return ResNet(Bottleneck, [3, 4, 23, 3])
+    return ResNet(Bottleneck, config['ResNet101'])
 
 
 def ResNet152():
-    return ResNet(Bottleneck, [3, 8, 36, 3])
+    return ResNet(Bottleneck, config['ResNet152'])
+
+def test():
+    net = ResNet101()
+    x = torch.randn(2, 3, 32, 32)
+    y = net(x)
+    print(y.size())
+
+# test()

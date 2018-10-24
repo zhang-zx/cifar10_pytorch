@@ -13,6 +13,7 @@ from util import progress_bar
 class Solver(object):
     def __init__(self, config):
         # torch.cuda.set_device(1)
+        # change GPU
         self.model = None
         self.model_name = config.net
         self.lr = config.lr
@@ -76,6 +77,10 @@ class Solver(object):
             'ResNet50': ResNet50(),
             'ResNet101': ResNet101(),
             'ResNet152': ResNet152(),
+            'VGG_11': VGG_11(),
+            'VGG_13': VGG_13(),
+            'VGG_16': VGG_16(),
+            'VGG_19': VGG_19(),
         }
         self.model = self.model_dic[self.model_name]
         self.model.to(self.device)

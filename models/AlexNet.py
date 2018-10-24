@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 NUM_CLASSES = 10
 
 class AlexNet(nn.Module):
@@ -39,3 +40,11 @@ class AlexNet(nn.Module):
         x = x.view(x.size(0), 256 * 2 * 2)
         x = self.classifier(x)
         return x
+
+def test():
+    net = AlexNet()
+    x = torch.randn(2, 3, 32, 32)
+    y = net(x)
+    print(y.size())
+
+# test()
