@@ -4,7 +4,7 @@ import argparse
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="cifar-10 with PyTorch")
-    parser.add_argument('--net', default='AlexNet', type=str, help='net type')
+    parser.add_argument('--net', default='ResNet152', type=str, help='net type')
     parser.add_argument('--lr', default=0.001, type=float, help='learning rate')
     parser.add_argument('--epoch', default=100, type=int, help='number of epochs tp train for')
     parser.add_argument('--trainBatchSize', default=100, type=int, help='training batch size')

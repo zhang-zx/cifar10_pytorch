@@ -56,8 +56,10 @@ class Solver(object):
 
     def load_data(self):
         train_transform = transforms.Compose([transforms.RandomHorizontalFlip(), transforms.RandomGrayscale()
-                                                 , transforms.ToTensor()])
-        test_transform = transforms.Compose([transforms.ToTensor()])
+                                                 , transforms.ToTensor(),
+                                              transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
+        test_transform = transforms.Compose([transforms.ToTensor(),
+                                             transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
         train_set = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=train_transform)
         self.train_loader = torch.utils.data.DataLoader(dataset=train_set, batch_size=self.train_batch_size,
                                                         shuffle=True)
@@ -88,7 +90,7 @@ class Solver(object):
         self.scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer=self.optimizer, mode='min', factor=0.5,
                                                               patience=5,
                                                               verbose=False, threshold=0.0001, threshold_mode='rel',
-                                                              cooldown=0, min_lr=1e-5, eps=1e-08)
+                                                              cooldown=0, min_lr=1e-08, eps=1e-08)
         self.criterion = nn.CrossEntropyLoss().to(self.device)
 
     def train(self):

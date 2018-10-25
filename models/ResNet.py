@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import math
 NUM_CLASSES = 10
 
@@ -21,7 +22,7 @@ class BasicBlock(nn.Module):
             nn.BatchNorm2d(num_features=channels),
             nn.ReLU(inplace=True),
             nn.Conv2d(in_channels=channels, out_channels=channels, kernel_size=3, stride=1, padding=1,
-                      bias=True),
+                      bias=False),
             nn.BatchNorm2d(num_features=channels)
         )
         self.down_sample = down_sample
@@ -41,13 +42,13 @@ class Bottleneck(nn.Module):
     def __init__(self, in_channels, channels, stride = 1, down_sample = None):
         super(Bottleneck, self).__init__()
         self.residual = nn.Sequential(
-            nn.Conv2d(in_channels=in_channels, out_channels=channels, kernel_size=1, bias=True),
+            nn.Conv2d(in_channels=in_channels, out_channels=channels, kernel_size=1, bias=False),
             nn.BatchNorm2d(num_features=channels),
             nn.ReLU(inplace=True),
-            nn.Conv2d(in_channels=channels, out_channels=channels, kernel_size=3, stride=stride, padding=1, bias=True),
+            nn.Conv2d(in_channels=channels, out_channels=channels, kernel_size=3, stride=stride, padding=1, bias=False),
             nn.BatchNorm2d(num_features=channels),
             nn.ReLU(inplace=True),
-            nn.Conv2d(in_channels=channels, out_channels=channels*self.expansion, kernel_size=1, bias=True),
+            nn.Conv2d(in_channels=channels, out_channels=channels*self.expansion, kernel_size=1, bias=False),
             nn.BatchNorm2d(num_features=channels*self.expansion)
         )
 
@@ -106,7 +107,7 @@ class ResNet(nn.Module):
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-        x = self.avg_pool(x)
+        x = F.avg_pool2d(x, 4)
         x = x.view(x.size(0), -1)
         return self.fc(x)
 

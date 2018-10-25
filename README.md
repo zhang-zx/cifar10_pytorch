@@ -16,7 +16,7 @@ Models | Best Accuracy | Comments
 [ResNet34](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | 90.81% |Same as ResNet18, such a failure. It's nothing but a waste of time😞. :) I think at most 100 epochs is enough for these ResNet models. The accuracy on training set approched 100% at that time. Also this one share the same learning rate decay pic with ResNet 18, just as VGG11 & VGG13. I just wonder why?
 [ResNet50](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) |90.40% |Maybe 50 epochs is enough😞. Not sure why it has worse performance than ResNet 34. Maybe it is due the inappropriate modification on bottleneck blocks...
 [ResNet101](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | 89.81% |Maybe something in the code went worng.
-[ResNet152](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | --- |---
+[ResNet152](https://github.com/zhang-zx/cifar10_pytorch/master/models/ResNet.py) | 89.97% |At least 5% less than I expected.
 
 
 
@@ -151,3 +151,13 @@ The log will be in nohup.out, and this line is really useful.
 2. **Learning Rate Decay** 
 
 ![image](./Img/ResNet101_Learning_Rate.png)
+
+## ResNet 152
+
+1. **Training Procedure** 
+
+![image](./Img/ResNet152_Train.png)
+
+2. **Learning Rate Decay** 
+
+![image](./Img/ResNet152_Learning_Rate.png)
